@@ -1,0 +1,23 @@
+Questão 0 - Verifique se as funções estão funcionando corretamente. Se não, faça a correção.
+- Estude o código.
+- Altere o valor de n para 1000000. O que pode estar acontecendo com o código?
+R:
+
+Questão 1 - Pq se deve alocar dinamicamente o vetor quando o n>>100 (grande)?
+R:
+ 
+Questão 2 - Qual a diferença entre &vet e vet? 
+R:
+
+Questão 3 - O que teremos que mudar para que função magina2 passe por parametro um ponteiro duplo
+R:
+
+Questão 4 - Pq o tempo de execução é bem menor na função?
+R:
+
+Questão 5 - O parâmetro desta função são valores ou ponteiros? Explique.
+R:
+
+Questão 6 - Está sendo realizada a troca de um valor ou um ponteiro? 
+R:
+
