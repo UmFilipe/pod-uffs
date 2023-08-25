@@ -1,23 +1,25 @@
 Questão 0 - Verifique se as funções estão funcionando corretamente. Se não, faça a correção.
 - Estude o código.
 - Altere o valor de n para 1000000. O que pode estar acontecendo com o código?
-R:
+R: As funções estão funcionando corretamente.
+Ao colocar o valor de n como 1000000, pode estar ocorrendo um estouro de pilha, ou falta de memória.
 
 Questão 1 - Pq se deve alocar dinamicamente o vetor quando o n>>100 (grande)?
-R:
+R: Quando n>>100, como o valor será muito grande, o vetor estático pode ocasionar um estouro de pilha. Fazendo assim melhor utilizar a alocação dinâmica para evitar este problema.
  
 Questão 2 - Qual a diferença entre &vet e vet? 
-R:
+R: &vet é o enderço para a variável vet.
+vet seria o array em si.
 
 Questão 3 - O que teremos que mudar para que função magina2 passe por parametro um ponteiro duplo
-R:
+R: A função magica2 ja está com um parâmetro que é um ponteiro duplo (**ptr).
 
 Questão 4 - Pq o tempo de execução é bem menor na função?
-R:
+R: A função magica2 utiliza Bubble Sort, e a função magica utiliza Selection Sort, que é menos eficiente que a Bubble, resultando em um menor tempo de execução na função magica2.
 
 Questão 5 - O parâmetro desta função são valores ou ponteiros? Explique.
-R:
+R: A função recebe dois ponteiros, e troca os valores das variáveis que estes ponteiros estão apontando.
 
 Questão 6 - Está sendo realizada a troca de um valor ou um ponteiro? 
-R:
+R: A troca é de um valor.
 
