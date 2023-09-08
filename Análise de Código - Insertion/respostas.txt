@@ -1,0 +1,16 @@
+1- Rode o código e verifique se está funcionando corretamente a partir do debug.
+R: O código funiona normalmente.
+
+2- Crie uma variável para indicar quantas operações de comparação foram executadas pelo algortimo de bublle e pelo Insertion. Para a mesma entrada de 10000 elementos quantas comparações foram realizadas? 
+R: O método bubble é menos eficiente pois faz praticamente o dobro de comparações.
+
+3- Quais são as diferenças entre os métodos bubble e insertion sort? 
+R:  O bubble compara um elemento com o elemento vizinho e realiza a troca caso estiverem fora de ordem, repetindo isso até que todos estejam na ordem correta.
+O Insertion Sort pega um elemento por vez e o insere na posição correta no subvetor ordenado, assim diminuindo o tempo de execução significativamente.
+
+4- Existe algum caso em que o buble é melhor que o sort em número de comparações?
+R: Não, o bubble sempre irá realizar o mesmo número de comparações no pior caso.
+
+5 - Compute o tempo para fazer o ordenamento de um mesmo vetor randômico com 100000 valores usando o bubble e o insertion. 
+R: Insertion = 15.631791 segundos
+Bubble = 24.832334 segundos
