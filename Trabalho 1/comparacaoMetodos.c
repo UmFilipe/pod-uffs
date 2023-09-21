@@ -91,7 +91,7 @@ void insertionSort(int *A, int size){
 
 }
 
-int quickSortAux(int *A, int baixo, int alto) {
+int quickSortAux(int *A, int baixo, int alto, int *contador) {
     int pivo = A[alto];
     int i = (baixo - 1);
 
@@ -99,17 +99,19 @@ int quickSortAux(int *A, int baixo, int alto) {
         if (A[j] < pivo) {
             i++;
             swap(&A[i], &A[j]);
+            (*contador)++;
         }
     }
     swap(&A[i + 1], &A[alto]);
+    (*contador)++;
     return (i + 1);
 }
 
-void quickSort(int *A, int baixo, int alto) {
+void quickSort(int *A, int baixo, int alto, int *contador) {
     if (baixo < alto) {
-        int indicePivo = quickSortAux(A, baixo, alto);
-        quickSort(A, baixo, indicePivo - 1);
-        quickSort(A, indicePivo + 1, alto);
+        int indicePivo = quickSortAux(A, baixo, alto, contador);
+        quickSort(A, baixo, indicePivo - 1, contador);
+        quickSort(A, indicePivo + 1, alto, contador);
     }
 
 }
@@ -117,15 +119,17 @@ void quickSort(int *A, int baixo, int alto) {
 int main(){
 
 	int i;
-	long int tamanhoVetor = 10000;
+	long int tamanhoVetor = 1000000;
 	int *vetor = (int*)malloc(tamanhoVetor * sizeof(int));
+
+    srand(time(NULL));
 
     for (i = 0; i < tamanhoVetor; i++){
         vetor[i]=(rand()%tamanhoVetor);
     } 
 
 	printf("\nVetor original: \n");
-	printArray(tamanhoVetor, vetor);
+	// printArray(tamanhoVetor, vetor);
 
 	printf("\nVetor tamanho = %ld\n", tamanhoVetor);
 
@@ -164,7 +168,6 @@ int main(){
 	// insertion sort
     int insertionVec[tamanhoVetor];
 	copia(vetor, insertionVec, tamanhoVetor);
-
     printf("\nInsertion sort: \n");
     clock_t inicioInsertion = clock();    
 	insertionSort(insertionVec, tamanhoVetor);
@@ -179,11 +182,12 @@ int main(){
 
 	// quick sort
     int quickVec[tamanhoVetor];
+    int contadorQuick = 0;
 	copia(vetor, quickVec, tamanhoVetor);
-
     printf("\nQuick sort: ");
     clock_t inicioQuick = clock();    
-	quickSort(quickVec, 0, tamanhoVetor - 1);
+	quickSort(quickVec, 0, tamanhoVetor - 1, &contadorQuick);
+    printf("Contador de trocas no quick: %d", contadorQuick);
     clock_t fimQuick = clock();
     double tempoQuick = (double)(fimQuick - inicioQuick) / CLOCKS_PER_SEC;
 
@@ -196,3 +200,6 @@ int main(){
 
 	return 0;
 }
+
+
+
