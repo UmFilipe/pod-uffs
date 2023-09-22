@@ -37,7 +37,7 @@ void copia(int *A, int *V, int size){
 
 void bubbleSort(int *A, int size){
    int i, j;
-   int contador = 0;   
+   long int contador = 0;   
     for (i = 0; i < size; i++) {   
         for (j = i + 1; j < size; j++) {   
             if (*(A + j) < *(A + i)) {   
@@ -47,12 +47,12 @@ void bubbleSort(int *A, int size){
         } 
     }   
 
-    printf("Contador de trocas no bubble: %i", contador);
+    printf("Contador de trocas no bubble: %ld\n", contador);
 
 }
 
 void selectionSort(int *A, int size){
-    int contador = 0;
+    long int contador = 0;
 
     for (int i = 0; i < size - 1; i++) {
         int min_index = i;
@@ -71,12 +71,12 @@ void selectionSort(int *A, int size){
         }
     }
 
-    printf("Contador de trocas no selection: %i", contador);
+    printf("Contador de trocas no selection: %ld\n", contador);
 }
 
 void insertionSort(int *A, int size){
    	int i,j, min;
-    int contador=0;
+    long int contador= 0;
     for (i = 1; i < size; i++) {   
         min=A[i];
         for (j=i; j>=1 && min< A[j-1];j--){
@@ -87,11 +87,11 @@ void insertionSort(int *A, int size){
         contador++;
     }
 
-    printf("Contador de trocas no insertion: %i", contador);
+    printf("Contador de trocas no insertion: %ld\n", contador);
 
 }
 
-int quickSortAux(int *A, int baixo, int alto, int *contador) {
+int quickSortAux(int *A, int baixo, int alto, long int *contador) {
     int pivo = A[alto];
     int i = (baixo - 1);
 
@@ -107,7 +107,7 @@ int quickSortAux(int *A, int baixo, int alto, int *contador) {
     return (i + 1);
 }
 
-void quickSort(int *A, int baixo, int alto, int *contador) {
+void quickSort(int *A, int baixo, int alto, long int *contador) {
     if (baixo < alto) {
         int indicePivo = quickSortAux(A, baixo, alto, contador);
         quickSort(A, baixo, indicePivo - 1, contador);
@@ -119,7 +119,7 @@ void quickSort(int *A, int baixo, int alto, int *contador) {
 int main(){
 
 	int i;
-	long int tamanhoVetor = 1000000;
+	long int tamanhoVetor = 1000;
 	int *vetor = (int*)malloc(tamanhoVetor * sizeof(int));
 
     srand(time(NULL));
@@ -128,75 +128,77 @@ int main(){
         vetor[i]=(rand()%tamanhoVetor);
     } 
 
-	printf("\nVetor original: \n");
+	// printf("\nVetor original: \n");
 	// printArray(tamanhoVetor, vetor);
 
 	printf("\nVetor tamanho = %ld\n", tamanhoVetor);
 
 	// bubble sort
-	int bubbleVec[tamanhoVetor];
-	copia(vetor, bubbleVec, tamanhoVetor);
+	int *bubbleVec = (int*)malloc(tamanhoVetor * sizeof(int));
+    copia(vetor, bubbleVec, tamanhoVetor);
 
     printf("\nBubble sort: \n");
     clock_t inicioBubble = clock();    
     bubbleSort(bubbleVec, tamanhoVetor);
     clock_t fimBubble = clock();
-    double tempoBubble = (double)(fimBubble - inicioBubble) / CLOCKS_PER_SEC;
-
-    printf("\nVetor ordenado pelo bubble sort: \n");
+    double tempoBubble = ((double)(fimBubble - inicioBubble) / CLOCKS_PER_SEC)/60;
+    // printf("\nVetor ordenado pelo bubble sort: \n");
     // printArray(tamanhoVetor, bubbleVec);
-    printf("Bubble sort demorou: %f segundos", tempoBubble);
+    printf("Bubble sort demorou: %f minutos", tempoBubble);
     printf("\n");
     
 
 	// selection sort
-    int selectionVec[tamanhoVetor];
+    int *selectionVec = (int*)malloc(tamanhoVetor * sizeof(int));
 	copia(vetor, selectionVec, tamanhoVetor);
 
     printf("\nSelection sort: \n");
     clock_t inicioSelection = clock();    
 	selectionSort(selectionVec, tamanhoVetor);
     clock_t fimSelection = clock();
-    double tempoSelection = (double)(fimSelection - inicioSelection) / CLOCKS_PER_SEC;
-
-    printf("\nVetor ordenado pelo selection sort: \n");
+    double tempoSelection = ((double)(fimSelection - inicioSelection) / CLOCKS_PER_SEC)/60;
+    // printf("\nVetor ordenado pelo selection sort: \n");
     // printArray(tamanhoVetor, selectionVec);
-    printf("Selection sort demorou: %f segundos", tempoSelection);
+    printf("Selection sort demorou: %f minutos", tempoSelection);
     printf("\n");
 
 
 	// insertion sort
-    int insertionVec[tamanhoVetor];
+    int *insertionVec = (int*)malloc(tamanhoVetor * sizeof(int));
 	copia(vetor, insertionVec, tamanhoVetor);
+
     printf("\nInsertion sort: \n");
     clock_t inicioInsertion = clock();    
 	insertionSort(insertionVec, tamanhoVetor);
     clock_t fimInsertion = clock();
-    double tempoInsertion = (double)(fimInsertion - inicioInsertion) / CLOCKS_PER_SEC;
-
-    printf("\nVetor ordenado pelo insertion sort: \n");
+    double tempoInsertion = ((double)(fimInsertion - inicioInsertion) / CLOCKS_PER_SEC)/60;
+    // printf("\nVetor ordenado pelo insertion sort: \n");
     // printArray(tamanhoVetor, insertionVec);
-    printf("Insertion sort demorou: %f segundos", tempoInsertion);
+    printf("Insertion sort demorou: %f minutos", tempoInsertion);
     printf("\n");
 
 
 	// quick sort
-    int quickVec[tamanhoVetor];
-    int contadorQuick = 0;
+    int *quickVec = (int*)malloc(tamanhoVetor * sizeof(int));
+    long int contadorQuick = 0;
+
 	copia(vetor, quickVec, tamanhoVetor);
     printf("\nQuick sort: ");
     clock_t inicioQuick = clock();    
 	quickSort(quickVec, 0, tamanhoVetor - 1, &contadorQuick);
-    printf("Contador de trocas no quick: %d", contadorQuick);
     clock_t fimQuick = clock();
-    double tempoQuick = (double)(fimQuick - inicioQuick) / CLOCKS_PER_SEC;
-
-    printf("\nVetor ordenado pelo quick sort: \n");
+    double tempoQuick = ((double)(fimQuick - inicioQuick) / CLOCKS_PER_SEC)/60;
+    printf("Contador de trocas no quick: %ld\n", contadorQuick);
+    // printf("\nVetor ordenado pelo quick sort: \n");
     // printArray(tamanhoVetor, quickVec);
-    printf("Quick sort demorou: %f segundos", tempoQuick);
+    printf("Quick sort demorou: %f minutos", tempoQuick);
     printf("\n");
 
     free(vetor);
+    free(bubbleVec);
+    free(selectionVec);
+    free(insertionVec);
+    free(quickVec);
 
 	return 0;
 }
