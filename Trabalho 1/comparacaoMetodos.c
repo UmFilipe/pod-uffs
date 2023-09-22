@@ -128,8 +128,8 @@ int main(){
         vetor[i]=(rand()%tamanhoVetor);
     } 
 
-	// printf("\nVetor original: \n");
-	// printArray(tamanhoVetor, vetor);
+	printf("\nVetor original: \n");
+	printArray(tamanhoVetor, vetor);
 
 	printf("\nVetor tamanho = %ld\n", tamanhoVetor);
 
@@ -142,8 +142,8 @@ int main(){
     bubbleSort(bubbleVec, tamanhoVetor);
     clock_t fimBubble = clock();
     double tempoBubble = ((double)(fimBubble - inicioBubble) / CLOCKS_PER_SEC)/60;
-    // printf("\nVetor ordenado pelo bubble sort: \n");
-    // printArray(tamanhoVetor, bubbleVec);
+    printf("\nVetor ordenado pelo bubble sort: \n");
+    printArray(tamanhoVetor, bubbleVec);
     printf("Bubble sort demorou: %f minutos", tempoBubble);
     printf("\n");
     
@@ -157,8 +157,8 @@ int main(){
 	selectionSort(selectionVec, tamanhoVetor);
     clock_t fimSelection = clock();
     double tempoSelection = ((double)(fimSelection - inicioSelection) / CLOCKS_PER_SEC)/60;
-    // printf("\nVetor ordenado pelo selection sort: \n");
-    // printArray(tamanhoVetor, selectionVec);
+    printf("\nVetor ordenado pelo selection sort: \n");
+    printArray(tamanhoVetor, selectionVec);
     printf("Selection sort demorou: %f minutos", tempoSelection);
     printf("\n");
 
@@ -172,8 +172,8 @@ int main(){
 	insertionSort(insertionVec, tamanhoVetor);
     clock_t fimInsertion = clock();
     double tempoInsertion = ((double)(fimInsertion - inicioInsertion) / CLOCKS_PER_SEC)/60;
-    // printf("\nVetor ordenado pelo insertion sort: \n");
-    // printArray(tamanhoVetor, insertionVec);
+    printf("\nVetor ordenado pelo insertion sort: \n");
+    printArray(tamanhoVetor, insertionVec);
     printf("Insertion sort demorou: %f minutos", tempoInsertion);
     printf("\n");
 
@@ -189,8 +189,8 @@ int main(){
     clock_t fimQuick = clock();
     double tempoQuick = ((double)(fimQuick - inicioQuick) / CLOCKS_PER_SEC)/60;
     printf("Contador de trocas no quick: %ld\n", contadorQuick);
-    // printf("\nVetor ordenado pelo quick sort: \n");
-    // printArray(tamanhoVetor, quickVec);
+    printf("\nVetor ordenado pelo quick sort: \n");
+    printArray(tamanhoVetor, quickVec);
     printf("Quick sort demorou: %f minutos", tempoQuick);
     printf("\n");
 
