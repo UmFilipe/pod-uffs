@@ -101,23 +101,21 @@ void adicionarStringNoArquivo(char *nomeArquivo) {
 
     arquivo = fopen(nomeArquivo, "r+");
 
-    
-        fgets(textoOriginal, sizeof(textoOriginal), arquivo);
+    fgets(textoOriginal, sizeof(textoOriginal), arquivo);
 
-        char *posicao = strstr(textoOriginal, "em");
+    char *posicao = strstr(textoOriginal, "em");
 
-        fseek(arquivo, posicao - textoOriginal + 2, SEEK_SET);
+    fseek(arquivo, posicao - textoOriginal + 2, SEEK_SET);
 
-        fputc(' ', arquivo);
-        fputs("quase", arquivo);
-        fputs(posicao + 2, arquivo);
+    fputc(' ', arquivo);
+    fputs("quase", arquivo);
+    fputs(posicao + 2, arquivo);
 
-        fclose(arquivo);
-        printf("Texto adicionado com sucesso.\n");
+    fclose(arquivo);
+    printf("Texto adicionado com sucesso.\n");
        
-        printf("Palavra 'em' não encontrada no arquivo.\n");
-        fclose(arquivo);
-       
+    printf("Palavra 'em' não encontrada no arquivo.\n");
+    fclose(arquivo);
 }
 
 void main() {
