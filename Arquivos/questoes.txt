@@ -1,0 +1,15 @@
+1 - Faça uma função capaz de salvar um vetor de inteiros de 1 até 10 em um arquivo.
+
+2 - Faça um código em C para armazenar um vetor randômico com 500 valores inteiros.
+
+3 - No arquivo da questão 4, faça uma função capaz de remover os números maiores que a média, 
+e refazer o salvamento no arquivo.
+
+4 - Crie um código em C para armazenar o seguinte texto em C:
+    “Eu sei trabalhar com arquivos em C”
+
+5 - Abra o arquivo anterior, apague a string “em C” e adiciona e string “em todas as linguagens de programação” usando o Fseek;
+    “Eu sei trabalhar com arquivos em todas as linguagens de     programação”
+
+6 - Altere  o arquivo para adicionar a string  “quase” ->
+    “Eu sei trabalhar com arquivos em quase todas as linguagens de programação”
