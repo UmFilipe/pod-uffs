@@ -202,7 +202,7 @@ void radixSort(int *A, int size) {
 void main(){
 
 	int i;
-	long int tamanhoVetor = 1000;
+	long int tamanhoVetor = 50000;
 	int *vetor = (int*)malloc(tamanhoVetor * sizeof(int));
 
     srand(time(NULL));
@@ -227,7 +227,7 @@ void main(){
     double tempoBubble = ((double)(fimBubble - inicioBubble) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo bubble sort: \n");
     // printArray(tamanhoVetor, bubbleVec);
-    printf("Bubble sort demorou: %f minutos", tempoBubble);
+    printf("Bubble sort demorou: %f segundos", tempoBubble);
     printf("\n");
     
 
@@ -242,7 +242,7 @@ void main(){
     double tempoSelection = ((double)(fimSelection - inicioSelection) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo selection sort: \n");
     // printArray(tamanhoVetor, selectionVec);
-    printf("Selection sort demorou: %f minutos", tempoSelection);
+    printf("Selection sort demorou: %f segundos", tempoSelection);
     printf("\n");
 
 
@@ -257,7 +257,7 @@ void main(){
     double tempoInsertion = ((double)(fimInsertion - inicioInsertion) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo insertion sort: \n");
     // printArray(tamanhoVetor, insertionVec);
-    printf("Insertion sort demorou: %f minutos", tempoInsertion);
+    printf("Insertion sort demorou: %f segundos", tempoInsertion);
     printf("\n");
 
 
@@ -274,7 +274,7 @@ void main(){
     printf("Contador de trocas no quick: %ld", contadorQuick);
     printf("\nVetor ordenado pelo quick sort: \n");
     // printArray(tamanhoVetor, quickVec);
-    printf("Quick sort demorou: %f minutos", tempoQuick);
+    printf("Quick sort demorou: %f segundos", tempoQuick);
     printf("\n");
 
     // heap sort
@@ -288,7 +288,7 @@ void main(){
     double tempoHeap = ((double)(fimHeap - inicioHeap) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo heap sort: \n");
     // printArray(tamanhoVetor, heapVec);
-    printf("Heap sort demorou: %f minutos", tempoHeap);
+    printf("Heap sort demorou: %f segundos", tempoHeap);
     printf("\n");
 
     // radix sort
@@ -302,7 +302,7 @@ void main(){
     double tempoRadix = ((double)(fimRadix - inicioRadix) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo radix sort: \n");
     // printArray(tamanhoVetor, radixVec);
-    printf("Radix sort demorou: %f minutos", tempoRadix);
+    printf("Radix sort demorou: %f segundos", tempoRadix);
     printf("\n");
 
     free(vetor);
