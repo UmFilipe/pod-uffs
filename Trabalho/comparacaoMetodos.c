@@ -46,7 +46,7 @@ void bubbleSort(int *A, int size) {
         }
     }
 
-    printf("Contador de trocas no bubble: %ld\n", contador);
+    printf("Contador de trocas no bubble: %ld", contador);
 }
 
 void selectionSort(int *A, int size){
@@ -69,121 +69,122 @@ void selectionSort(int *A, int size){
         }
     }
 
-    printf("Contador de trocas no selection: %ld\n", contador);
+    printf("Contador de trocas no selection: %ld", contador);
 }
 
 void insertionSort(int *A, int size) {
     int i, chave, j;
     long int contador = 0;
+
     for (i = 1; i < size; i++) {
         chave = A[i];
         j = i - 1;
 
-        // Mova os elementos de A[0..i-1] que são maiores que chave
-        // para uma posição à frente de sua posição atual
         while (j >= 0 && A[j] > chave) {
             swap(&A[j + 1], &A[j]);
             j = j - 1;
             contador++;
         }
+
         A[j + 1] = chave;
         contador++;
     }
-    printf("Contador de trocas no insertion: %ld\n", contador);
+
+    printf("Contador de trocas no insertion: %ld", contador);
 }
 
-int quickSortAux(int *A, int baixo, int alto, long int *contador) {
-    int pivo = A[alto];
-    int i = (baixo - 1);
+int quickSortAux(int *A, int primeiro, int ultimo, long int *contador) {
+    int pivo = A[ultimo];
+    int i = (primeiro - 1);
 
-    for (int j = baixo; j <= alto - 1; j++) {
+    for (int j = primeiro; j <= ultimo - 1; j++) {
         if (A[j] < pivo) {
             i++;
             swap(&A[i], &A[j]);
             (*contador)++;
         }
     }
-    swap(&A[i + 1], &A[alto]);
+    swap(&A[i + 1], &A[ultimo]);
     (*contador)++;
     return (i + 1);
 }
 
-void quickSort(int *A, int baixo, int alto, long int *contador) {
-    if (baixo < alto) {
-        int indicePivo = quickSortAux(A, baixo, alto, contador);
-        quickSort(A, baixo, indicePivo - 1, contador);
-        quickSort(A, indicePivo + 1, alto, contador);
+void quickSort(int *A, int primeiro, int ultimo, long int *contador) {
+    if (primeiro < ultimo) {
+        int indicePivo = quickSortAux(A, primeiro, ultimo, contador);
+        quickSort(A, primeiro, indicePivo - 1, contador);
+        quickSort(A, indicePivo + 1, ultimo, contador);
     }
 
 }
 
-void maxHeapify(int *A, int size, int i, long int *contador) {
-    int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
+void manterHeapMax(int *A, int size, int i, long int *contador) {
+    int maior = i;
+    int esquerda = 2 * i + 1;
+    int direita = 2 * i + 2;
 
-    if (left < size && A[left] > A[largest]) {
-        largest = left;
+    if (esquerda < size && A[esquerda] > A[maior]) {
+        maior = esquerda;
     }
 
-    if (right < size && A[right] > A[largest]) {
-        largest = right;
+    if (direita < size && A[direita] > A[maior]) {
+        maior = direita;
     }
 
-    if (largest != i) {
-        swap(&A[i], &A[largest]);
+    if (maior != i) {
+        swap(&A[i], &A[maior]);
         (*contador)++;
-        maxHeapify(A, size, largest, contador);
+        manterHeapMax(A, size, maior, contador);
     }
 }
 
-void buildMaxHeap(int *A, int size, long int *contador) {
+void construirHeapMax(int *A, int size, long int *contador) {
     for (int i = size / 2 - 1; i >= 0; i--) {
-        maxHeapify(A, size, i, contador);
+        manterHeapMax(A, size, i, contador);
     }
 }
 
 void heapSort(int *A, int size) {
     long int contador = 0;
     
-    buildMaxHeap(A, size, &contador);
+    construirHeapMax(A, size, &contador);
 
     for (int i = size - 1; i > 0; i--) {
         swap(&A[0], &A[i]);
         contador++;
-        maxHeapify(A, i, 0, &contador);
+        manterHeapMax(A, i, 0, &contador);
     }
 
-    printf("Contador de trocas no heap: %ld\n", contador);
+    printf("Contador de trocas no heap: %ld", contador);
 }
 
-void countingSort(int *A, int size, int exp, long int *contador) {
-    int output[size];
-    int count[10] = {0};
+void countingSort(int *A, int size, int exp) {
+    int arrayTemp[size];
+    int arrayContagem[10] = {0};
 
     for (int i = 0; i < size; i++) {
-        count[(A[i] / exp) % 10]++;
+        arrayContagem[(A[i] / exp) % 10]++;
     }
 
     for (int i = 1; i < 10; i++) {
-        count[i] += count[i - 1];
+        arrayContagem[i] += arrayContagem[i - 1];
     }
 
     for (int i = size - 1; i >= 0; i--) {
-        output[count[(A[i] / exp) % 10] - 1] = A[i];
-        count[(A[i] / exp) % 10]--;
+        arrayTemp[arrayContagem[(A[i] / exp) % 10] - 1] = A[i];
+        arrayContagem[(A[i] / exp) % 10]--;
     }
 
     for (int i = 0; i < size; i++) {
-        if (A[i] != output[i]) {
-            A[i] = output[i];
-            (*contador)++;
+        if (A[i] != arrayTemp[i]) {
+            A[i] = arrayTemp[i];
         }
     }
 }
 
-void radixSort(int *A, int size, long int *contador) {
+void radixSort(int *A, int size) {
     int max = A[0];
+    long int contador = 0;
 
     for (int i = 1; i < size; i++) {
         if (A[i] > max) {
@@ -192,16 +193,16 @@ void radixSort(int *A, int size, long int *contador) {
     }
 
     for (int exp = 1; max / exp > 0; exp *= 10) {
-        countingSort(A, size, exp, contador);
+        countingSort(A, size, exp);
     }
 
-    printf("Contador de trocas no radix: %ld\n", *contador);
+    printf("Contador de trocas no radix: %ld", contador);
 }
 
 void main(){
 
 	int i;
-	long int tamanhoVetor = 100000;
+	long int tamanhoVetor = 1000;
 	int *vetor = (int*)malloc(tamanhoVetor * sizeof(int));
 
     srand(time(NULL));
@@ -223,7 +224,7 @@ void main(){
     clock_t inicioBubble = clock();    
     bubbleSort(bubbleVec, tamanhoVetor);
     clock_t fimBubble = clock();
-    double tempoBubble = ((double)(fimBubble - inicioBubble) / CLOCKS_PER_SEC)/60;
+    double tempoBubble = ((double)(fimBubble - inicioBubble) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo bubble sort: \n");
     // printArray(tamanhoVetor, bubbleVec);
     printf("Bubble sort demorou: %f minutos", tempoBubble);
@@ -238,7 +239,7 @@ void main(){
     clock_t inicioSelection = clock();    
 	selectionSort(selectionVec, tamanhoVetor);
     clock_t fimSelection = clock();
-    double tempoSelection = ((double)(fimSelection - inicioSelection) / CLOCKS_PER_SEC)/60;
+    double tempoSelection = ((double)(fimSelection - inicioSelection) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo selection sort: \n");
     // printArray(tamanhoVetor, selectionVec);
     printf("Selection sort demorou: %f minutos", tempoSelection);
@@ -253,7 +254,7 @@ void main(){
     clock_t inicioInsertion = clock();    
 	insertionSort(insertionVec, tamanhoVetor);
     clock_t fimInsertion = clock();
-    double tempoInsertion = ((double)(fimInsertion - inicioInsertion) / CLOCKS_PER_SEC)/60;
+    double tempoInsertion = ((double)(fimInsertion - inicioInsertion) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo insertion sort: \n");
     // printArray(tamanhoVetor, insertionVec);
     printf("Insertion sort demorou: %f minutos", tempoInsertion);
@@ -265,12 +266,12 @@ void main(){
     long int contadorQuick = 0;
 
 	copia(vetor, quickVec, tamanhoVetor);
-    printf("\nQuick sort: ");
+    printf("\nQuick sort: \n");
     clock_t inicioQuick = clock();    
 	quickSort(quickVec, 0, tamanhoVetor - 1, &contadorQuick);
     clock_t fimQuick = clock();
-    double tempoQuick = ((double)(fimQuick - inicioQuick) / CLOCKS_PER_SEC)/60;
-    printf("Contador de trocas no quick: %ld\n", contadorQuick);
+    double tempoQuick = ((double)(fimQuick - inicioQuick) / CLOCKS_PER_SEC);
+    printf("Contador de trocas no quick: %ld", contadorQuick);
     printf("\nVetor ordenado pelo quick sort: \n");
     // printArray(tamanhoVetor, quickVec);
     printf("Quick sort demorou: %f minutos", tempoQuick);
@@ -284,7 +285,7 @@ void main(){
     clock_t inicioHeap = clock();
     heapSort(heapVec, tamanhoVetor);
     clock_t fimHeap = clock();
-    double tempoHeap = ((double)(fimHeap - inicioHeap) / CLOCKS_PER_SEC) / 60;
+    double tempoHeap = ((double)(fimHeap - inicioHeap) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo heap sort: \n");
     // printArray(tamanhoVetor, heapVec);
     printf("Heap sort demorou: %f minutos", tempoHeap);
@@ -296,10 +297,9 @@ void main(){
 
     printf("\nRadix sort: \n");
     clock_t inicioRadix = clock();
-    long int contadorRadix = 0;
-    radixSort(radixVec, tamanhoVetor, &contadorRadix);
+    radixSort(radixVec, tamanhoVetor);
     clock_t fimRadix = clock();
-    double tempoRadix = ((double)(fimRadix - inicioRadix) / CLOCKS_PER_SEC) / 60;
+    double tempoRadix = ((double)(fimRadix - inicioRadix) / CLOCKS_PER_SEC);
     printf("\nVetor ordenado pelo radix sort: \n");
     // printArray(tamanhoVetor, radixVec);
     printf("Radix sort demorou: %f minutos", tempoRadix);
